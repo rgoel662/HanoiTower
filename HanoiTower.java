@@ -65,7 +65,7 @@ public class HanoiTower {
 		/*
 		 *	User plays game
 		 */
-		playGame(args);
+		//playGame(args);
 		
 		/*
 		 *	Step-by-step algorithm solves the game using 4 levels
@@ -75,7 +75,7 @@ public class HanoiTower {
 		/*
 		 *	Automated solver method
 		 */
-		//solvePuzzle(args);
+		solvePuzzle(args);
 		
 		// Print out number of moves
 		System.out.println("\nIt took you " + numMoves + " moves with " + levels + " levels.\n");
@@ -198,6 +198,8 @@ public class HanoiTower {
 		 *
 		 *	to be completed by student ...
 		 */
+		solve(levels, 0, 1);
+		
 	}
 	
 	/*
@@ -205,7 +207,29 @@ public class HanoiTower {
 	 *
 	 *	to be completed by student ...
 	 */
-
+	public void solve(int depth, int currLoc, int finalLoc){
+		int temp = -1;
+		if (currLoc == 0 && finalLoc == 1){
+			temp = 2;
+		} else if(currLoc == 0 && finalLoc == 2){
+			temp = 1;
+		} else if(currLoc == 1 && finalLoc == 0){
+			temp = 2;
+		} else if(currLoc == 1 && finalLoc == 2){
+			temp = 0;
+		} else if(currLoc == 2 && finalLoc == 1){
+			temp = 0;
+		} else if(currLoc == 2 && finalLoc == 0){
+			temp = 1;
+		}
+		if (depth != 1){
+			solve(depth - 1, currLoc, temp);
+		} 
+		moveDisk(currLoc, finalLoc);
+		printTowers();
+		if (depth != 1)
+			solve(depth-1, temp, finalLoc);
+	}
 	
 	/**
 	 *	Move the top disk from peg to peg. Move is successful if a smaller
