@@ -39,7 +39,7 @@
  *		3. solvePuzzle() - Automated algorithm to solve the puzzle with any
  *							number of disks. (to be completed by student)
  *
- *	@author Mr Greenstein
+ *	@author Mr Greenstein & Rishabh Goel
  *	@version January 1, 2017
  */
 public class HanoiTower {
@@ -75,7 +75,11 @@ public class HanoiTower {
 		/*
 		 *	Automated solver method
 		 */
+		long start = System.currentTimeMillis();
 		solvePuzzle(args);
+		long end = System.currentTimeMillis();
+
+		System.out.println("Solved in: " + (end - start) + " milliseconds");
 		
 		// Print out number of moves
 		System.out.println("\nIt took you " + numMoves + " moves with " + levels + " levels.\n");
@@ -192,23 +196,23 @@ public class HanoiTower {
 		initializeTower();
 		
 		printTowers();
-		
 		/*
 		 *	A recursive method to solve the puzzle is called here.
-		 *
-		 *	to be completed by student ...
 		 */
 		solve(levels, 0, 1);
 		
 	}
 	
-	/*
-	 *	Recursive method goes here.
-	 *
-	 *	to be completed by student ...
+	
+	/**
+	 * The recursive method to solve tower of hanoi on any depth.
+	 * 
+	 * @param depth 	The depth of the tower you are solving for
+	 * @param currLoc	The current location of the tower
+	 * @param finalLoc	The final location where you want the tower to be
 	 */
 	public void solve(int depth, int currLoc, int finalLoc){
-		int temp = -1;
+		int temp = -1; //The place where you want to move the tower of depth - 1
 		if (currLoc == 0 && finalLoc == 1){
 			temp = 2;
 		} else if(currLoc == 0 && finalLoc == 2){
@@ -222,12 +226,13 @@ public class HanoiTower {
 		} else if(currLoc == 2 && finalLoc == 0){
 			temp = 1;
 		}
-		if (depth != 1){
+		if (depth != 1){ // solve the previous depth 
 			solve(depth - 1, currLoc, temp);
 		} 
-		moveDisk(currLoc, finalLoc);
-		printTowers();
-		if (depth != 1)
+		moveDisk(currLoc, finalLoc); // move current disk of the depth
+		// printTowers();
+		// try{ Thread.sleep(500); }catch(Exception e){System.exit(1);}
+		if (depth != 1) // move the moved towers back onto where current tower is
 			solve(depth-1, temp, finalLoc);
 	}
 	
