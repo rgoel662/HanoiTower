@@ -230,8 +230,8 @@ public class HanoiTower {
 			solve(depth - 1, currLoc, temp);
 		} 
 		moveDisk(currLoc, finalLoc); // move current disk of the depth
-		// printTowers();
-		// try{ Thread.sleep(500); }catch(Exception e){System.exit(1);}
+		printTowers();
+		// try{ Thread.sleep(250); }catch(Exception e){System.exit(1);}
 		if (depth != 1) // move the moved towers back onto where current tower is
 			solve(depth-1, temp, finalLoc);
 	}
